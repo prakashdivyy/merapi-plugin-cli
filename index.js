@@ -12,7 +12,7 @@ module.exports = function (merapi) {
         typeCli(name, opt) {
             this.apps.push(name);
             return function* (config, injector, logger) {
-                let app;
+                let app = {};
 
                 let getFn = getfn(injector);
 
