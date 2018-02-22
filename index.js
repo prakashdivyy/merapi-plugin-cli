@@ -52,7 +52,9 @@ module.exports = function (merapi) {
 
                 app.start = function () {
                     let argv = yargs.command("version", "Show CLI version", (yargs) => { }, (yargs) => {
-                        console.log(config.default("version", "0.0.1"));
+                        let packageName = config.default("name", "CLI");
+                        let packageVersion = config.default("version", "0.0.1")
+                        console.log(`${packageName} ${packageVersion}`);
                     }).version(false).demandCommand(1).showHelpOnFail(true).strict().argv;
                     if (!argv._[0]) {
                         yargs.help();
