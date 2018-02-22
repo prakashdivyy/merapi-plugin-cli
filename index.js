@@ -32,7 +32,8 @@ module.exports = function (merapi) {
                                 sc[subcommand].arguments = _.filter(esprima.tokenize(sc[subcommand].args), function (o) { return o.type === "Identifier"; });
                             }
                         }
-                        yargs.command(key, data.desc, (yargs) => {
+                        let description = data.desc ? data.desc : "";
+                        yargs.command(key, description, (yargs) => {
                             yargs.demandCommand(1);
                             for (let c in sc) {
                                 let cmd = sc[c].args ? `${c} ${sc[c].args}` : `${c}`;
@@ -52,7 +53,7 @@ module.exports = function (merapi) {
                 app.start = function () {
                     let argv = yargs.command("version", "Show CLI version", (yargs) => { }, (yargs) => {
                         console.log(config.default("version", "0.0.1"));
-                    }).version(false).demandCommand(1, '').showHelpOnFail(true).strict().argv;
+                    }).version(false).demandCommand(1).showHelpOnFail(true).strict().argv;
                     if (!argv._[0]) {
                         yargs.help();
                     }
