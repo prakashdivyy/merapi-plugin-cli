@@ -1,7 +1,6 @@
 "use strict";
 
 const esprima = require("esprima");
-const getfn = require("./lib/getfn");
 const yargs = require("yargs");
 const _ = require("lodash");
 const createAction = require("./lib/helper");
@@ -15,8 +14,6 @@ module.exports = function (merapi) {
             this.apps.push(name);
             return function* (config, injector, logger) {
                 let app = {};
-
-                let getFn = getfn(injector);
 
                 opt.config = opt.config || "commands";
                 let cfg = config.default(opt.config, {});
